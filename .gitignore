@@ -55,3 +55,7 @@ examples/example_sdl_opengl3/example_sdl_opengl3
 # Visual Studio files and folders
 *.sln
 *.vcxproj
+
+# Binaries
+**/bin/
+bin-int/
