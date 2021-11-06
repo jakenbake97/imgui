@@ -640,11 +640,19 @@ static void ImGui_ImplDX11_CreateWindow(ImGuiViewport* viewport)
     sd.SampleDesc.Count = 1;
     sd.SampleDesc.Quality = 0;
     sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    sd.BufferCount = 1;
+    sd.BufferCount = 2;
     sd.OutputWindow = hwnd;
     sd.Windowed = TRUE;
-    sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
     sd.Flags = 0;
+
+    if constexpr (MAJOR_VERSION < 10)
+    {
+        sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+    }
+    else
+    {
+        sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;
+    }
 
     IM_ASSERT(vd->SwapChain == NULL && vd->RTView == NULL);
     bd->pFactory->CreateSwapChain(bd->pd3dDevice, &sd, &vd->SwapChain);

@@ -24,6 +24,11 @@ project "ImGui"
 
 	filter "system:windows"
 		systemversion "latest"
+        defines
+        {
+            "MAJOR_VERSION=%{os.getversion().majorversion}",
+		    "MINOR_VERSION=%{os.getversion().minorversion}"
+        }
 
 	filter "system:linux"
 		pic "on"
